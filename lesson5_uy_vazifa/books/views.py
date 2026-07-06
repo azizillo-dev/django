@@ -13,6 +13,17 @@ def book_list(request):
 
 
 
+def create_book(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        author = request.POST.get("author")
+        price = request.POST.get("price")
+        desc = request.POST.get("desc")
+        count = request.POST.get("count")
+
+        Book.objects.create(title=title, author=author, price=price, desc=desc, count=count)
+    return render(request, "add_book.html")
+
 
 
 

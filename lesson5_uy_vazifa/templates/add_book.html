@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Book</title>
+</head>
+<body>
+    <form method = "POST">
+        {% csrf_token %}
+        <h1 style = "text-align: center; color:chartreuse">Create Book Sahifasi</h1><br>
+        <input type="text", placeholder = "Name of Book "; name = "title"><br><br>
+        <input type="text", placeholder = "Author  "; name = "author"><br><br>
+        <input type="number", placeholder = "Price  "; name = "price"><br><br>
+        <input type="text", placeholder = "Description  "; name = "desc"><br><br>
+        <input type="number", placeholder = "Count  "; name = "count"><br><br>
+        <button type="submit", style = "background-color: chartreuse; color: white; padding: 8px 18px; text-align: center; border-radius: 5px;">Saqlash</button>
+    </form>
+</body>
+</html>
