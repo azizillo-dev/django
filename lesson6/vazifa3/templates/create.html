@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Yangi Gul Qo'shish | Gullar Do'koni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e84a6f;
+            --primary-dark: #c73255;
+            --primary-light: #ff758f;
+            --accent-green: #2d6a4f;
+            --accent-green-light: #52b788;
+            --bg-gradient: linear-gradient(135deg, #fff5f6 0%, #ffeaf0 50%, #f4f9f5 100%);
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --text-dark: #2b2d42;
+            --text-muted: #6c757d;
+            --shadow: 0 20px 45px rgba(232, 74, 111, 0.15);
+            --border-radius: 28px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background glow circles */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(85px);
+            opacity: 0.45;
+        }
+        body::before {
+            background: #ffb3c6;
+            top: -120px;
+            right: -100px;
+        }
+        body::after {
+            background: #b7e4c7;
+            bottom: -120px;
+            left: -100px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: var(--shadow);
+            padding: 45px 40px;
+            width: 100%;
+            max-width: 580px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent-green-light));
+        }
+
+        .header-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #fff0f3, #ffe3e8);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(232, 74, 111, 0.12);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 35px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(232, 74, 111, 0.15);
+        }
+
+        /* Checkbox styling */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 28px 0 32px;
+            padding: 16px 20px;
+            background: rgba(232, 74, 111, 0.05);
+            border-radius: 16px;
+            border: 1px dashed rgba(232, 74, 111, 0.25);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-group:hover {
+            background: rgba(232, 74, 111, 0.08);
+        }
+
+        .checkbox-input {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(232, 74, 111, 0.35);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(232, 74, 111, 0.45);
+        }
+
+        .btn-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-dark);
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 580px) {
+            .form-card { padding: 35px 24px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <div class="header-icon">🌸</div>
+        <h1>Yangi Gul <span>Qo'shish</span></h1>
+        <p class="subtitle">Do'konimiz kolleksiyasiga yangi nafis gul ma'lumotlarini kiriting</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-label">🏷️ Gul nomi</label>
+                <input type="text" class="form-input" placeholder="Masalan: Qizil atirgul, Lola, Binafsha..." name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">💰 Gul narxi (so'm)</label>
+                <input type="number" step="0.01" class="form-input" placeholder="Masalan: 150000" name="price" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">📝 Gul tavsifi</label>
+                <input type="text" class="form-input" placeholder="Gul haqida qisqacha ma'lumot va xususiyatlari..." name="desc" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">🎨 Gul rangi</label>
+                <input type="text" class="form-input" placeholder="Masalan: Qizil, Oq, Pushti, Sariq..." name="color" required>
+            </div>
+
+            <label class="checkbox-group">
+                <input type="checkbox" class="checkbox-input" name="is_tikonli" id="is_tikonli">
+                <span class="checkbox-label">🌹 Tikonli gulmi? (Rose/Tikon mavjud)</span>
+            </label>
+
+            <button type="submit" class="btn-submit">
+                <span>💾 Saqlash va Qo'shish</span>
+            </button>
+
+            <a href="{% url 'home_page'%}" class="btn-back">
+                <span>⬅️ Bosh sahifaga qaytish</span>
+            </a>
+        </form>
+    </div>
+</body>
+</html>

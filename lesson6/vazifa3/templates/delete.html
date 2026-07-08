@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gulni O'chirish | {{ flower.name }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e84a6f;
+            --danger: #ef4444;
+            --danger-dark: #dc2626;
+            --bg-gradient: linear-gradient(135deg, #fff5f6 0%, #ffeaf0 50%, #f4f9f5 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-dark: #2b2d42;
+            --text-muted: #6c757d;
+            --shadow: 0 25px 50px rgba(239, 68, 68, 0.18);
+            --border-radius: 28px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background glow circles */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(85px);
+            opacity: 0.4;
+        }
+        body::before {
+            background: #ffb3c6;
+            top: -120px;
+            right: -100px;
+        }
+        body::after {
+            background: #fca5a5;
+            bottom: -120px;
+            left: -100px;
+        }
+
+        .delete-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: var(--shadow);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .delete-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--danger), #f87171);
+        }
+
+        .warning-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.15);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .flower-info-box {
+            background: rgba(239, 68, 68, 0.04);
+            border: 1px dashed rgba(239, 68, 68, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0 30px;
+        }
+
+        .flower-name-hl {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--danger);
+            margin-bottom: 6px;
+        }
+
+        .flower-price-hl {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-delete {
+            flex: 1;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.35);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(239, 68, 68, 0.45);
+        }
+
+        .btn-cancel {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-dark);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-dark);
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        @media (max-width: 500px) {
+            .delete-card { padding: 35px 24px; }
+            .button-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="delete-card">
+        <div class="warning-icon">🥀</div>
+        <h1>Gulni O'chirishni Tasdiqlang</h1>
+        
+        <div class="flower-info-box">
+            <div class="flower-name-hl">{{ flower.name }}</div>
+            <div class="flower-price-hl">🏷️ Narxi: {{ flower.price }} so'm</div>
+        </div>
+
+        <p>Haqiqatdan ham ushbu nafis gulni do'koningiz kolleksiyasidan o'chirishni xohlaysizmi? Bu amalni ortga qaytarib bo'lmaydi.</p>
+
+        <div class="button-group">
+            <form method="POST" class="form-delete">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    <span>🗑️ Ha, o'chirilsin</span>
+                </button>
+            </form>
+            <a href="{% url 'home_page'%}" class="btn btn-cancel">
+                <span>⬅️ Yo'q, bekor qilish</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
