@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .glass-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(to right, #34d399, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        input::placeholder {
+            color: #64748b;
+        }
+        input:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #34d399;
+            box-shadow: 0 0 12px rgba(52, 211, 153, 0.3);
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #34d399, #059669);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 211, 153, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-form">
+        <h1>Yangi avtomobil qo'shish</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group"><input type="text" placeholder="Brand" name="brand"></div>
+            <div class="input-group"><input type="text" placeholder="Model" name="model"></div>
+            <div class="input-group"><input type="number" placeholder="Year" name="year"></div>
+            <div class="input-group"><input type="number" placeholder="Price" name="price"></div>
+            <div class="input-group"><input type="number" placeholder="Mileage" name="mileage"></div>
+            <div class="input-group"><input type="text" placeholder="Color" name="color"></div>                          
+            <button type="submit">Qo'shish</button>
+        </form>
+    </div>
+</body>
+</html>

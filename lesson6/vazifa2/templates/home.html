@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asosiy sahifa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-align: center;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+        ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        li {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        li:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .car-info {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .car-details {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+        }
+        .btn-detail {
+            background: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .btn-detail:hover {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+        .btn-delete {
+            background: rgba(248, 113, 113, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+        .btn-delete:hover {
+            background: #f87171;
+            color: #fff;
+        }
+        .btn-create {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .btn-create:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+        .center-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jamiki avtomobillarimiz bilan tanishing</h1>
+        {% csrf_token %}
+        <ul>
+            {% for car in cars %}
+            <li>
+                <div class="car-info">{{ car.brand }} {{ car.model }}</div>
+                <div class="car-details">
+                    Yili: {{ car.year }} | Rangi: {{ car.color }}<br>
+                    Yurgani: {{ car.mileage }} km<br>
+                    <strong style="color: #34d399; font-size: 1.05rem;">${{ car.price }}</strong>
+                </div>
+                <div class="actions">
+                    <a href="{% url 'detail_car' pk=car.pk %}" class="btn btn-detail">Batafsil</a>
+                    <a href="{% url 'delete_car' pk=car.pk %}" class="btn btn-delete">O'chirish</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="center-wrapper">
+            <a href="{% url 'create_car' %}" class="btn btn-create">Yangi car qo'shish</a>
+        </div>
+    </div>
+</body>
+</html>

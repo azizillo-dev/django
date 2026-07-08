@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{car.model}} {{car.brand}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.1rem;
+        }
+        .info-label {
+            color: #94a3b8;
+        }
+        .info-value {
+            color: #fff;
+            font-weight: 500;
+        }
+        .price-tag {
+            color: #34d399 !important;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .btn-back {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            color: #94a3b8;
+            margin-top: 30px;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        .btn-back:hover {
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        {% csrf_token %}
+        <h1>{{car.brand}} {{car.model}}</h1>
+        
+        <div class="info-row">
+            <span class="info-label">Ishlab chiqarilgan yili:</span>
+            <span class="info-value">{{car.year}}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Bosib o'tgan masofasi:</span>
+            <span class="info-value">{{car.mileage}} km</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Rangi:</span>
+            <span class="info-value">{{car.color}}</span>
+        </div>
+        <div class="info-row" style="border: none;">
+            <span class="info-label">Narxi:</span>
+            <span class="info-value price-tag">${{car.price}}</span>
+        </div>
+
+        <a href="{% url 'home_page' %}" class="btn-back">← Orqaga qaytish</a>
+    </div>
+</body>
+</html>
