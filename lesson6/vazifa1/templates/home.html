@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+            overflow-x:hidden;
+        }
+
+        body::before{
+            content:'';
+            position:absolute;
+            width:350px;
+            height:350px;
+            background:#3b82f6;
+            border-radius:50%;
+            filter:blur(170px);
+            top:-100px;
+            left:-100px;
+        }
+
+        body::after{
+            content:'';
+            position:absolute;
+            width:350px;
+            height:350px;
+            background:#8b5cf6;
+            border-radius:50%;
+            filter:blur(170px);
+            bottom:-100px;
+            right:-100px;
+        }
+
+        .container{
+            width:92%;
+            max-width:1250px;
+            background:rgba(255,255,255,.08);
+            backdrop-filter:blur(20px);
+            border:1px solid rgba(255,255,255,.2);
+            border-radius:25px;
+            padding:35px;
+            position:relative;
+            z-index:1;
+            box-shadow:0 25px 50px rgba(0,0,0,.35);
+        }
+
+        .top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:35px;
+            flex-wrap:wrap;
+            gap:20px;
+        }
+
+        h1{
+            color:white;
+            font-size:35px;
+            font-weight:600;
+        }
+
+        .btn{
+            text-decoration:none;
+            color:white;
+            background:linear-gradient(135deg,#06b6d4,#3b82f6);
+            padding:14px 30px;
+            border-radius:12px;
+            font-weight:600;
+            transition:.3s;
+            box-shadow:0 10px 20px rgba(59,130,246,.35);
+        }
+
+        .btn:hover{
+            transform:translateY(-3px);
+            box-shadow:0 15px 30px rgba(59,130,246,.45);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            overflow:hidden;
+            border-radius:18px;
+        }
+
+        thead{
+            background:rgba(255,255,255,.12);
+        }
+
+        th{
+            color:#fff;
+            padding:18px;
+            font-size:15px;
+            font-weight:600;
+        }
+
+        td{
+            color:#e5e7eb;
+            text-align:center;
+            padding:18px;
+            border-top:1px solid rgba(255,255,255,.08);
+        }
+
+        tbody tr{
+            transition:.3s;
+        }
+
+        tbody tr:hover{
+            background:rgba(255,255,255,.08);
+        }
+
+        .price{
+            color:#4ade80;
+            font-weight:600;
+        }
+
+        .gpu{
+            color:#38bdf8;
+            font-weight:600;
+        }
+
+        .brand{
+            color:white;
+            font-weight:600;
+        }
+
+        .delete{
+            text-decoration:none;
+            color:white;
+            background:#ef4444;
+            padding:10px 18px;
+            border-radius:10px;
+            transition:.3s;
+        }
+
+        .delete:hover{
+            background:#dc2626;
+        }
+
+        .empty{
+            color:white;
+            text-align:center;
+            font-size:22px;
+            padding:40px;
+        }
+
+        @media(max-width:900px){
+
+            .container{
+                padding:20px;
+            }
+
+            table{
+                display:block;
+                overflow-x:auto;
+            }
+
+            h1{
+                font-size:28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="top">
+        <h1>💻 Computer Store</h1>
+
+        <a href="create/" class="btn">
+            + Add Computer
+        </a>
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Price</th>
+                <th>GPU</th>
+                <th>Screen</th>
+                <th>Created</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for computer in computers %}
+
+            <tr>
+
+                <td>{{ computer.id }}</td>
+
+                <td class="brand">
+                    {{ computer.brand }}
+                </td>
+
+                <td>
+                    {{ computer.name }}
+                </td>
+
+                <td class="price">
+                    ${{ computer.price }}
+                </td>
+
+                <td class="gpu">
+                    {{ computer.gpu }}
+                </td>
+
+                <td>
+                    {{ computer.screen_info }}
+                </td>
+
+                <td>
+                    {{ computer.created_at }}
+                </td>
+
+                <td>
+
+                    <a href="/delete/{{ computer.id }}/" class="delete">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+
+                <td colspan="8" class="empty">
+                    🚀 Hozircha kompyuterlar mavjud emas.
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
