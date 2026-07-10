@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+<body>
+    <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" value="{{ course.title }}"><br>
+    <input type="text" name="teacher" value="{{ course.teacher }}"><br>
+    <input type="text" name="desc" value="{{ course.desc }}"><br>
+    <input type="text" name="price" value="{{ course.price }}"><br>
+    <input type="text" name="days" value="{{ course.days }}"><br>
+    <button type="submit">Saqlash</button>
+    <a href="{% url 'list' %}">Orqaga</a>
+</form>
+</body>
+</html>

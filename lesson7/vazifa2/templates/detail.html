@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .detail-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .info-row {
+            margin: 12px 0;
+            font-size: 16px;
+            color: #444;
+        }
+        .info-row strong {
+            color: #2c3e50;
+            display: inline-block;
+            width: 130px;
+        }
+        .desc {
+            margin-top: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="detail-card">
+        <h1>{{ course.title }} haqida to'liq ma'lumot</h1>
+
+        <div class="info-row">
+            <strong>O'qituvchi:</strong> {{ course.teacher }}
+        </div>
+        <div class="info-row">
+            <strong>Narxi:</strong> {{ course.price }} so'm
+        </div>
+        <div class="info-row">
+            <strong>Davomiyligi:</strong> {{ course.days }} kun
+        </div>
+        <div class="info-row">
+            <strong>Qo'shilgan sana:</strong> {{ course.created_at|date:"d.m.Y" }}
+        </div>
+
+        <div class="desc">
+            <strong>Tavsif:</strong>
+            <p>{{ course.desc|default:"Tavsif kiritilmagan" }}</p>
+        </div>
+
+        <a href="{% url 'list' %}" class="back-link">&larr; Barcha kurslarga qaytish</a>
+    </div>
+</body>
+</html>
