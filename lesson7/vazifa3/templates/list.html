@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mebellarimiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .course-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .course-card h3 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+        }
+        .course-card p {
+            margin: 4px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bu yerda barcha mebellarimiz bilan tanishishingiz mumkin</h1>
+    <a href="{% url 'create' %}" style="margin-left: 28.5cm;">Qo'shish</a>
+    <div class="container">
+        {% for mebel in mebels %}
+        <div class="course-card">
+            <a href="{% url 'detail' mebel.id %}">{{mebel.name}}</a>
+            <p>Material: {{ mebel.material}}</p>
+            <a href="{% url 'delete' mebel.id %}">Delete</a>
+            <a href="{% url 'update' mebel.id %}">Tahrirlash</a>
+        </div>
+        {% empty %}
+        <p>Hozircha mebellar mavjud emas.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
