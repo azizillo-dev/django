@@ -1,13 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
+    <title>CYBER-EDU // ACADEMY PORTAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #040711;
+            --cyber-cyan: #00f2fe;
+            --cyber-blue: #4facfe;
+            --cyber-pink: #ff007f;
+            --cyber-green: #00ff88;
+            --glass-panel: rgba(10, 18, 38, 0.75);
+            --border-glow: rgba(0, 242, 254, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Cyber Grid & Floating Cubes Background */
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 242, 254, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 254, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 40px 40px; }
+        }
+
+        .portal-core {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(255, 0, 127, 0.05) 50%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+            animation: pulseCore 6s infinite ease-in-out alternate;
+        }
+
+        @keyframes pulseCore {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* HUD Portal Container */
+        .hud-container {
+            position: relative;
+            z-index: 10;
+            max-width: 780px;
+            width: 90%;
+            background: var(--glass-panel);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 60px 50px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 242, 254, 0.2), inset 0 0 30px rgba(0, 242, 254, 0.05);
+            animation: terminalEntry 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Decorative HUD Corner Accents */
+        .hud-corner {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-color: var(--cyber-cyan);
+            border-style: solid;
+        }
+        .corner-tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; }
+        .corner-tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; }
+        .corner-bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; }
+        .corner-br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; }
+
+        .system-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--cyber-cyan);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            padding: 6px 16px;
+            border-radius: 4px;
+            border-left: 3px solid var(--cyber-cyan);
+        }
+
+        .portal-title {
+            font-size: 3.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--cyber-cyan) 60%, var(--cyber-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 242, 254, 0.5);
+        }
+
+        .portal-subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.15rem;
+            color: #a0aec0;
+            max-width: 600px;
+            margin: 0 auto 45px;
+            line-height: 1.6;
+        }
+
+        /* Holographic Button */
+        .btn-portal {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 45px;
+            background: linear-gradient(90deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.25));
+            border: 2px solid var(--cyber-cyan);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
+            overflow: hidden;
+        }
+
+        .btn-portal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.6s;
+        }
+
+        .btn-portal:hover::before {
+            left: 100%;
+        }
+
+        .btn-portal:hover {
+            background: var(--cyber-cyan);
+            color: #040711;
+            box-shadow: 0 0 45px rgba(0, 242, 254, 0.8);
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        /* Status Bar Footer */
+        .status-footer {
+            margin-top: 45px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: #64748b;
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+            padding-top: 25px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyber-green);
+            box-shadow: 0 0 10px var(--cyber-green);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes terminalEntry {
+            from { opacity: 0; transform: scale(0.9) translateY(30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .portal-title { font-size: 2.2rem; }
+            .hud-container { padding: 40px 25px; }
+            .btn-portal { padding: 16px 30px; font-size: 0.95rem; }
+        }
+    </style>
 </head>
 <body>
-    <h2>Assalomu alekum saytimizga hush kelibsiz </h2>
-    <a href="{% url 'list' %}">Barcha kurslar</a>
+    <div class="cyber-grid"></div>
+    <div class="portal-core"></div>
 
+    <div class="hud-container">
+        <div class="hud-corner corner-tl"></div>
+        <div class="hud-corner corner-tr"></div>
+        <div class="hud-corner corner-bl"></div>
+        <div class="hud-corner corner-br"></div>
+
+        <span class="system-tag">PROTOCOL: CYBER-EDU // V2.0</span>
+        
+        <h1 class="portal-title">ZAMONAVIY ACADEMY PORTAL</h1>
+        
+        <p class="portal-subtitle">
+            Kelajak texnologiyalari va dasturlash kurslari markaziga xush kelibsiz. Barcha o'quv modullari, axborot bazasi va boshqaruv tizimi bitta platformada.
+        </p>
+
+        <a href="{% url 'list' %}" class="btn-portal">
+            <span>⚡ TIZIMGA KIRISH // BARCHA KURSLAR</span>
+        </a>
+
+        <div class="status-footer">
+            <div class="status-item">
+                <span class="status-dot"></span>
+                <span>STATUS: ONLINE</span>
+            </div>
+            <div class="status-item">
+                <span>SECURITY: ENCRYPTED</span>
+            </div>
+            <div class="status-item">
+                <span>VER: 2026.07</span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

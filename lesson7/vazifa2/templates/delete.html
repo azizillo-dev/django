@@ -1,19 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete {{course.title}}</title>
+    <title>CYBER-EDU // PROTOCOL: PURGE {{ course.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #040711;
+            --cyber-red: #ff0844;
+            --cyber-pink: #ffb199;
+            --cyber-cyan: #00f2fe;
+            --glass-panel: rgba(22, 8, 16, 0.88);
+            --border-glow: rgba(255, 8, 68, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 8, 68, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 8, 68, 0.05) 1px, transparent 1px);
+            background-size: 35px 35px;
+            z-index: -1;
+        }
+
+        .purge-terminal {
+            width: 100%;
+            max-width: 560px;
+            background: var(--glass-panel);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 45px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 60px rgba(255, 8, 68, 0.35);
+            animation: alertEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .purge-terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff0844, #ffb199);
+        }
+
+        .alert-icon {
+            width: 86px;
+            height: 86px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 8, 68, 0.15);
+            border: 2px solid var(--cyber-red);
+            border-radius: 50%;
+            font-size: 2.6rem;
+            color: var(--cyber-red);
+            box-shadow: 0 0 30px rgba(255, 8, 68, 0.5);
+            animation: pulseAlert 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseAlert {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 8, 68, 0.5); }
+            50% { transform: scale(1.08); box-shadow: 0 0 45px rgba(255, 8, 68, 0.85); }
+        }
+
+        .alert-title {
+            font-size: 1.9rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px rgba(255, 8, 68, 0.5);
+        }
+
+        .alert-sub {
+            font-family: 'Share Tech Mono', monospace;
+            color: #cbd5e1;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .target-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px dashed var(--cyber-red);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .target-label {
+            color: #64748b;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .target-val {
+            color: #ff4d6d;
+            font-size: 1.3rem;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--cyber-red) 0%, #ffb199 100%);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 8, 68, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-confirm:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 45px rgba(255, 8, 68, 0.8);
+        }
+
+        .btn-cancel {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        @keyframes alertEntry {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .purge-terminal { padding: 35px 22px; }
+            .alert-title { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>
-        O'chirish sahifasi
-    </h1>
-    <form method="POST">
-        {% csrf_token %}
-        <p>Haqiqatdan ham {{course.title}} ni o'chirishni hohlaysizmi ?</p>
-        <button type="submit">Ha</button>
-        <a href="{% url 'list' %}">Orqaga</a>
-    </form>
+    <div class="cyber-grid"></div>
+
+    <div class="purge-terminal">
+        <div class="alert-icon">⚠️</div>
+        
+        <h1 class="alert-title">MODULNI BUTUNLAY O'CHIRISH</h1>
+        
+        <p class="alert-sub">
+            Diqqat! Quyidagi o'quv modulini bazadan o'chirish bo'yicha buyruq berildi. Ushbu amal ortga qaytarilmaydi:
+        </p>
+
+        <div class="target-box">
+            <span class="target-label">// TARGET MODULE FOR PURGE:</span>
+            <div class="target-val">{{ course.title }}</div>
+        </div>
+
+        <div class="actions">
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn-confirm">
+                    [ ☠️ EXECUTE PURGE // HA, BUTUNLAY O'CHIRILSIN ]
+                </button>
+            </form>
+            <a href="{% url 'list' %}" class="btn-cancel">
+                [ 🛡️ ABORT PROTOCOL // BEKOR QILISH VA QAYTISH ]
+            </a>
+        </div>
+    </div>
 </body>
 </html>
