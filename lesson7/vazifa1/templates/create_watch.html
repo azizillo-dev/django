@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxTime | Yangi Soat Qo'shish</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070b19;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-bg-hover: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-border-focus: #00f2fe;
+            --primary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --accent-gradient: linear-gradient(135deg, #7f00ff 0%, #e100ff 100%);
+            --text-main: #ffffff;
+            --text-muted: #a0aec0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Background Orbs */
+        .ambient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(85px);
+            opacity: 0.5;
+            animation: floatOrb 14s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            top: 10%;
+            left: 15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #00f2fe, #4facfe);
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            bottom: 10%;
+            right: 15%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, #7f00ff, #e100ff);
+            animation-delay: -7s;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(-50px, 40px) scale(1.15);
+            }
+            100% {
+                transform: translate(50px, -40px) scale(0.95);
+            }
+        }
+
+        /* Form Container Card */
+        .form-container {
+            width: 100%;
+            max-width: 780px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 45px 50px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+            position: relative;
+            animation: formEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        /* Back Button */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateX(-4px);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .form-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #90cdf4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Form Grid Layout */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.95rem;
+        }
+
+        input:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        input:focus {
+            border-color: var(--glass-border-focus);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Number input styles */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            grid-column: 1 / -1;
+            margin-top: 15px;
+            padding: 18px;
+            background: var(--primary-gradient);
+            color: #070b19;
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+            transition: 0.6s;
+        }
+
+        .submit-btn:hover::after {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(0, 242, 254, 0.6);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        @keyframes formEntry {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 30px 22px;
+                border-radius: 24px;
+            }
+            form {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .form-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="form-container">
+        <div class="header-top">
+            <a href="{% url 'home_page' %}" class="back-btn">← Orqaga</a>
+            <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">PREMIUM FORM</span>
+        </div>
+
+        <div class="form-header">
+            <h1 class="form-title">✨ Ma'lumotlarni To'ldiring</h1>
+            <p class="form-subtitle">Yangi soat xususiyatlarini va narxini kiritib kolleksiyaga qo'shing</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="name">📌 Soat Nomi</label>
+                <div class="input-wrapper">
+                    <input type="text" id="name" name="name" placeholder="Masalan: Rolex, Casio, Seiko..." required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="model">🏷️ Modeli</label>
+                <div class="input-wrapper">
+                    <input type="text" id="model" name="model" placeholder="Masalan: Submariner, G-Shock..." required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="price">💵 Narxi ($ USD)</label>
+                <div class="input-wrapper">
+                    <input type="number" step="0.01" id="price" name="price" placeholder="Masalan: 1250.00" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="mexanism">⚙️ Mexanizmi</label>
+                <div class="input-wrapper">
+                    <input type="text" id="mexanism" name="mexanism" placeholder="Masalan: Avtomatik, Kvars, Mexanik..." required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="color">🎨 Rangi</label>
+                <div class="input-wrapper">
+                    <input type="text" id="color" name="color" placeholder="Masalan: Kumush, Tilla, Qora..." required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="remenka">🎗️ Remenka (Tasmasi)</label>
+                <div class="input-wrapper">
+                    <input type="text" id="remenka" name="remenka" placeholder="Masalan: Teridan, Metall, Silikon..." required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="shape">📐 Shakli</label>
+                <div class="input-wrapper">
+                    <input type="text" id="shape" name="shape" placeholder="Masalan: Yumaloq, Kvadrat..." required>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="description">📝 Tavsifi (Description)</label>
+                <div class="input-wrapper">
+                    <input type="text" id="description" name="description" placeholder="Soat haqida qisqacha ma'lumot va afzalliklari..." required>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span>✨ Saqlash va Qo'shish</span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Subtle input animation sound/visual confirmation on focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.style.transform = 'scale(1.01)';
+                input.parentElement.parentElement.style.transition = 'all 0.3s ease';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

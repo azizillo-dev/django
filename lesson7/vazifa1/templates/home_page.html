@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxTime | Jamiki Soatlar Kolleksiyasi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070b19;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-bg-hover: rgba(255, 255, 255, 0.11);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-border-hover: rgba(0, 242, 254, 0.5);
+            --primary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --accent-gradient: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+            --text-main: #ffffff;
+            --text-muted: #a0aec0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Ambient Background Orbs */
+        .ambient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.45;
+            animation: floatOrb 12s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            top: -10%;
+            left: -10%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, #00f2fe, #4facfe);
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            bottom: -15%;
+            right: -10%;
+            width: 650px;
+            height: 650px;
+            background: radial-gradient(circle, #7f00ff, #e100ff);
+            animation-delay: -4s;
+        }
+
+        .orb-3 {
+            top: 45%;
+            left: 55%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, #ff0844, #ffb199);
+            animation-delay: -8s;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(60px, 40px) scale(1.15);
+            }
+            100% {
+                transform: translate(-40px, 80px) scale(0.95);
+            }
+        }
+
+        /* Navbar / Header */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1300px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            font-size: 1.4rem;
+            color: #070b19;
+            -webkit-text-fill-color: #070b19;
+            animation: pulseIcon 3s infinite ease-in-out;
+        }
+
+        /* Add Button */
+        .btn-add {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 26px;
+            background: var(--primary-gradient);
+            color: #070b19;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0, 242, 254, 0.35);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-add::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-add:hover::before {
+            left: 100%;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.55);
+        }
+
+        .btn-add:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .btn-add span {
+            font-size: 1.3rem;
+            line-height: 1;
+            font-weight: 900;
+        }
+
+        /* Main Container */
+        .main-container {
+            width: 90%;
+            max-width: 1300px;
+            margin: 0 auto 60px;
+        }
+
+        /* Hero / Section Header */
+        .hero-section {
+            text-align: center;
+            padding: 40px 0 30px;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ffffff 30%, #a0aec0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 35px;
+            line-height: 1.6;
+        }
+
+        /* Search & Filter Bar */
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 24px 16px 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: #fff;
+            font-size: 1.05rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .search-input:focus {
+            border-color: #00f2fe;
+            background: rgba(255, 255, 255, 0.09);
+            box-shadow: 0 10px 35px rgba(0, 242, 254, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        /* Watch Cards Grid */
+        .watch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+            perspective: 1000px;
+        }
+
+        /* Glassmorphism Card */
+        .watch-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 26px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: cardAppear 0.6s ease-out backwards;
+        }
+
+        /* Stagger card animations */
+        .watch-card:nth-child(1) { animation-delay: 0.1s; }
+        .watch-card:nth-child(2) { animation-delay: 0.2s; }
+        .watch-card:nth-child(3) { animation-delay: 0.3s; }
+        .watch-card:nth-child(4) { animation-delay: 0.4s; }
+        .watch-card:nth-child(5) { animation-delay: 0.5s; }
+        .watch-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .watch-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .watch-card:hover::after {
+            opacity: 1;
+        }
+
+        .watch-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--glass-border-hover);
+            background: var(--glass-bg-hover);
+            box-shadow: 0 30px 60px rgba(0, 242, 254, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .watch-badge {
+            padding: 6px 14px;
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid rgba(0, 242, 254, 0.4);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #00f2fe;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .watch-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .watch-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .watch-model {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            display: block;
+            font-weight: 400;
+        }
+
+        /* Specifications Grid */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .spec-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 14px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .watch-card:hover .spec-item {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .spec-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .watch-description {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 14px;
+            border-radius: 14px;
+            border-left: 3px solid #00f2fe;
+            margin-top: auto;
+        }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px dashed var(--glass-border);
+            border-radius: 30px;
+            animation: fadeIn 1s ease;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: floatOrb 4s infinite ease-in-out;
+        }
+
+        .empty-state h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .empty-state p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        /* Keyframes */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 30px rgba(0, 242, 254, 0.7);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 16px;
+                padding: 16px 20px;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .watch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="{% url 'home_page' %}" class="logo">
+            <div class="logo-icon">⌚</div>
+            <span>LUXTIME</span>
+        </a>
+        <a href="{% url 'create_watch' %}" class="btn-add">
+            <span>+</span> Yangi Soat Qo'shish
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <section class="hero-section">
+            <h1 class="hero-title">Jamiki Soatlar Kolleksiyasi</h1>
+            <p class="hero-subtitle">Barcha nafis va eksklyuziv soatlar to'plami. Yangi modellar, yuqori sifatli mexanizmlar va zamonaviy dizayn bir joyda.</p>
+            
+            <!-- Live Search Bar -->
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Soat nomi, modeli yoki rangini qidiring...">
+            </div>
+        </section>
+
+        <!-- Watch Cards Grid -->
+        <div class="watch-grid" id="watchGrid">
+            {% for watch in watches %}
+            <div class="watch-card" data-search="{{ watch.name|lower }} {{ watch.model|lower }} {{ watch.color|lower }} {{ watch.mexanism|lower }}">
+                <div>
+                    <div class="card-header">
+                        <span class="watch-badge">ORIGINAL</span>
+                        <div class="watch-price">${{ watch.price }}</div>
+                    </div>
+
+                    <h3 class="watch-title">{{ watch.name }}</h3>
+                    <span class="watch-model">Model: {{ watch.model }}</span>
+
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Mexanizm</span>
+                            <div class="spec-value">{{ watch.mexanism }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Rangi</span>
+                            <div class="spec-value">{{ watch.color }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Remenka</span>
+                            <div class="spec-value">{{ watch.remenka }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Shakli</span>
+                            <div class="spec-value">{{ watch.shape }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="watch-description">
+                    {{ watch.description|default:"Ushbu soat yuqori aniqlik va nafis dizayn asosida yaratilgan." }}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <div class="empty-icon">⏳</div>
+                <h3>Hozircha soatlar qo'shilmagan</h3>
+                <p>Kolleksiyada hech qanday ma'lumot yo'q. Birinchi soatni qo'shing!</p>
+                <a href="{% url 'create_watch' %}" class="btn-add">
+                    <span>+</span> Birinchi Soatni Qo'shish
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script>
+        // Interactive Card Glow Effect on Mouse Move
+        document.querySelectorAll('.watch-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Instant Live Search Filtering
+        const searchInput = document.getElementById('searchInput');
+        const watchCards = document.querySelectorAll('.watch-card');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                watchCards.forEach(card => {
+                    const searchData = card.getAttribute('data-search') || '';
+                    if (searchData.includes(query)) {
+                        card.style.display = 'flex';
+                        card.style.animation = 'fadeIn 0.4s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
