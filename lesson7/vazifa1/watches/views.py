@@ -59,6 +59,19 @@ def delete_watch(request, pk):
 
 
 
+def update_watch(request, pk):
+    watch = Watch.objects.get(id=pk)
+    form = WatchForm(instance=watch)
+    if request.method == "POST":
+        form = WatchForm(data=request.POST, instance=watch)
+        if form.is_valid():
+            form.save()
+            return redirect('home_page')
+    context = {"form": form, "watch": watch}
+    return render(request, "update_page.html", context)
+
+
+
 
 
 

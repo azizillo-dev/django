@@ -290,7 +290,6 @@
             animation: cardAppear 0.6s ease-out backwards;
         }
 
-        /* Stagger card animations */
         .watch-card:nth-child(1) { animation-delay: 0.1s; }
         .watch-card:nth-child(2) { animation-delay: 0.2s; }
         .watch-card:nth-child(3) { animation-delay: 0.3s; }
@@ -412,7 +411,57 @@
             padding: 14px;
             border-radius: 14px;
             border-left: 3px solid #00f2fe;
+            margin-bottom: 20px;
+        }
+
+        /* Card Actions (Update & Delete) */
+        .card-actions {
+            display: flex;
+            gap: 12px;
             margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 18px;
+            z-index: 2;
+        }
+
+        .btn-action {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-edit {
+            background: rgba(255, 193, 7, 0.15);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .btn-edit:hover {
+            background: #ffc107;
+            color: #070b19;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-delete {
+            background: rgba(255, 8, 68, 0.15);
+            color: #ff4d6d;
+            border: 1px solid rgba(255, 8, 68, 0.3);
+        }
+
+        .btn-delete:hover {
+            background: #ff0844;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(255, 8, 68, 0.4);
+            transform: translateY(-2px);
         }
 
         /* Empty State */
@@ -570,8 +619,15 @@
                     </div>
                 </div>
 
-                <div class="watch-description">
-                    {{ watch.description|default:"Ushbu soat yuqori aniqlik va nafis dizayn asosida yaratilgan." }}
+                <div>
+                    <div class="watch-description">
+                        {{ watch.description|default:"Ushbu soat yuqori aniqlik va nafis dizayn asosida yaratilgan." }}
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="{% url 'update' watch.id %}" class="btn-action btn-edit">✏️ Tahrirlash</a>
+                        <a href="{% url 'delete' watch.id %}" class="btn-action btn-delete">🗑️ O'chirish</a>
+                    </div>
                 </div>
             </div>
             {% empty %}
