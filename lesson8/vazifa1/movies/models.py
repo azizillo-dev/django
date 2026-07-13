@@ -52,6 +52,9 @@ class Movie(BaseModel):
         return f"{self.title} {self.producer.full_name} {self.category.title}"
 
 
+
+
+
     
 
 
