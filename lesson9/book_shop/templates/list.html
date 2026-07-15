@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Assalomu alekum bu yerda barcha kitoblarni ko'rishingiz mumkin</h1>
+    {% for book in books %}
+    <p>{{book.image}}</p>
+    <p>{{book.title}}</p>
+    {% endfor %}
+    <a href="{ url 'detail' book.id }">Batafsil</a><br>
+    <a href="{ url 'delete' book.id }">O'chirish</a><br>
+
+    <a href="{ url 'create' }">+ Yangi kitob</a>
+        
+</body>
+</html>
