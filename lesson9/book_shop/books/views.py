@@ -10,7 +10,7 @@ def home_page(request):
 
 
 def book_list(request):
-    books = Book.objects.all()
+    books = Book.objects.all()  
     context = {
         "books" : books
     }
@@ -23,30 +23,38 @@ def create_book(request):
         if form.is_valid():
             form.save()
             return redirect('list')
-    
+    else:
+        form = BookForm()
+
     context = {
-        "form" : form
+        "form": form
     }
-
-    return render(request, 'create.html',context)
-
+    return render(request, 'create.html', context)
 
 def detail_book(request, pk):
-    book = Book.objects.get_object_or_404(id=pk)
+    book = get_object_or_404(Book, id=pk)   # ✅ to'g'ri
 
     context = {
-        "book" : book
+        "book": book
     }
     return render(request, "detail.html", context)
 
 
+
+
 def delete_book(request, pk):
-    book = Book.objects.get(id=pk)
-    book.delete()
+    if request.method == "POST":
+        book = Book.objects.get(id=pk)
+        book.delete()
+        return redirect('list')
     context = {
         "book" : book
     }
     return render(request, "delete.html", context)
+
+
+
+
 
 def update_book(request, pk):
     book = Book.objects.get_object_or_404(id=pk)

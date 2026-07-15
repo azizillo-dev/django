@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete</title>
+</head>
+<body>
+    <h4>Rostdan ham {{book.title}} ni o'chirmqochimisiz</h4>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Ha</button>
+    </form>
+    <a href="{% url 'list' %}">Orqaga</a>
+</body>
+</html>

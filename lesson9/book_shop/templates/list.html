@@ -9,12 +9,13 @@
     <h1>Assalomu alekum bu yerda barcha kitoblarni ko'rishingiz mumkin</h1>
     {% for book in books %}
     <p>{{book.image}}</p>
-    <p>{{book.title}}</p>
+    <p>{{book.title}}</p>    
+    <a href="{% url 'detail' book.id %}">Batafsil</a><br>
+    <a href="{% url 'delete' book.id %}">O'chirish</a><br>
     {% endfor %}
-    <a href="{ url 'detail' book.id }">Batafsil</a><br>
-    <a href="{ url 'delete' book.id }">O'chirish</a><br>
 
-    <a href="{ url 'create' }">+ Yangi kitob</a>
-        
+
+    <a href="{% url 'create' %}">+ Yangi kitob</a>
+
 </body>
 </html>
