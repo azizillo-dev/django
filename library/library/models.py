@@ -12,7 +12,7 @@ class BaseModel(models.Model):
 
 class Author(BaseModel):
     full_name = models.CharField(max_length=100)
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
 
     def __str__(self):
         return self.full_name
