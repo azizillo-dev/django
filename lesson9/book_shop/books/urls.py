@@ -10,7 +10,5 @@ urlpatterns = [
     path('delete-book/<int:pk>', delete_book, name = 'delete'),
     path('book-list/', book_list, name = 'list'),
     path('update-book/<int:pk>', update_book, name = 'update'),
-    path('category/<str:category>', book_category, name='categories'),
-    path('author/<str:author>', author_books, name='author'),
-
+    path('category/<int:pk>', book_category, name='categories'),    path('author/<str:author>', author_books, name='author'),
 ]

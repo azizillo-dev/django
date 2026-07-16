@@ -81,15 +81,12 @@ def book_category(request, pk):
         "books": books
     })
 
-
 def author_books(request, author):
-    books = Book.objects.filter(author=author)
+    books = Book.objects.filter(author__name=author)
 
-    if not books:
-        return HttpResponse("Bu  authorda kitoblar mavjud emas !")
-    return render(request, 'author_book.html', {"books" : books})
-
-
+    if not books.exists():
+        return HttpResponse("Bu authorda kitoblar mavjud emas!")
+    return render(request, 'author_book.html', {"books": books})
 
 
 
