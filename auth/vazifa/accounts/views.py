@@ -4,7 +4,7 @@ from django.views import View
 
 
 def home(request):
-    return redirect(request, 'home.html')
+    return redirect('home')
 
 
 
