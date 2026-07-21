@@ -10,9 +10,6 @@ def home(request):
     return render(request, "home.html")
 
 
-
-
-
 class BookListView(View):
     def get(self, request):
         books = Book.objects.all()
@@ -26,8 +23,6 @@ class BookCreate(View):
     def get(self, request):
         form = BookForm()
         return render(request, 'book_form.html', context={'form': form})
-
-
 
     def post(self, request):
         form = BookForm(data=request.POST)
