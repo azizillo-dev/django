@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Bu yerda barcha kiyimlar</h2>
+
+    <div>
+        {% for i in clothes %}
+        {{i.name}}
+        {{i.brand}}
+        {{i.price}}
+        {% endfor %}
+    </div>
+</body>
+</html>
