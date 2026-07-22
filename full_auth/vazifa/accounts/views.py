@@ -43,11 +43,14 @@ class LoginView(View):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
 
-            user = authenticate(username=username, password=password)
-            if not user:
-                raise ValidationError("Login yoki parol xato")
-            login(request, user)
-            return redirect('dashboard')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('dashboard')
+            else:
+                form.add_error(None, "Login yoki parol xato")
+                
+        return render(request, 'auth/login.html', {"form" : form})
 
 
 
