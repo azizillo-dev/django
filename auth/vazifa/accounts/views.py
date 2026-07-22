@@ -1,6 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
 from django.views import View
+from django.core.exceptions import ValidationError
+from .forms import RegisterForm
+
+
+
+
+
+
+
+
 
 def home(request):
     return render(request, 'home.html')
@@ -8,28 +18,54 @@ def home(request):
 
 class RegisterView(View):
 
-
     def get(self, request):
-        return render(request, 'auth/register.html')
+        form = RegisterForm()
+        return render(request, 'auth/register.html', {"form" : form})
     
+
     def post(self, request):
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        year = request.POST.get('year')
-        address = request.POST.get('address')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        form = RegisterForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        return render(request, 'auth/register.html', {"form" : form})
 
-        CustomUser.objects.create(
-            first_name = first_name, 
-            last_name = last_name,
-            year = year,
-            username = username,
-            password = password,
-            address = address
-        )
 
-        return redirect('home')
+    # bu bitta usul edi
+
+    # def post(self, request):
+    #     first_name = request.POST.get('first_name')
+    #     last_name = request.POST.get('last_name')
+    #     year = request.POST.get('year')
+    #     address = request.POST.get('address')
+    #     username = request.POST.get('username')
+    #     password = request.POST.get('password')
+    #     confrim_password = request.POST.get('confirm_password')
+    #     if confrim_password != password:
+    #         raise ValidationError("Parollar mos emas")
+
+    #     # CustomUser.objects.create_user(
+    #     #     first_name = first_name, 
+    #     #     last_name = last_name,
+    #     #     year = year,
+    #     #     username = username,
+    #     #     password = password,
+    #     #     address = address
+    #     # )
+
+
+    #     user = CustomUser(
+    #         first_name = first_name, 
+    #         last_name = last_name,
+    #         year = year,
+    #         username = username,
+    #         password = password,
+    #         address = address
+    #     )
+    #     user.set_password(password)
+    #     user.save()
+
+    #     return redirect('home')
     
     
 

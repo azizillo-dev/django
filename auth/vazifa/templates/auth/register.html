@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,28 @@
         <input type="number" placeholder="year" name="year"><br>
         <input type="text" placeholder="username" name="username"><br>
         <input type="text" placeholder="password" name="password"><br>
+        <input type="text" placeholder="confirm_password" name="confirm_password"><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
         <button type="submit">Register</button>
     </form>
 </body>
