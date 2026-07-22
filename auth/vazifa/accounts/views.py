@@ -2,10 +2,8 @@ from django.shortcuts import render, redirect
 from .models import CustomUser
 from django.views import View
 
-
 def home(request):
-    return redirect('home')
-
+    return render(request, 'home.html')
 
 
 class RegisterView(View):
