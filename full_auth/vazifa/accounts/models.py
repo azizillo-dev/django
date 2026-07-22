@@ -15,6 +15,12 @@ class CustomUser(AbstractUser):
     address = models.CharField(max_length=100, blank=True)
     gender = models.CharField(max_length=20, choices=Gender.choices, blank=True)
     email = models.EmailField(unique=True)
+    image = models.ImageField(
+        upload_to='users/', 
+        null=True, 
+        blank=True
+    )
+
 
     def __str__(self):
         return self.username

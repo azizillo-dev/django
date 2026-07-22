@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Book Shop</title>
+    <title>Parolni O'zgartirish - Book Shop</title>
     <style>
         body {
             background-color: #2c1e16;
@@ -14,30 +14,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            padding: 20px;
         }
 
         .book-container {
             display: flex;
             width: 800px;
             height: 500px;
-            perspective: 2000px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             border-radius: 10px;
-            position: relative;
+            background: #f4ecd8;
         }
 
         .page {
             width: 50%;
             height: 100%;
-            background: #f4ecd8;
             padding: 40px;
             box-sizing: border-box;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
-            position: absolute;
-            top: 0;
             overflow-y: auto;
         }
         
@@ -46,68 +42,19 @@
         .page::-webkit-scrollbar-thumb { background: #c2b28f; border-radius: 3px; }
 
         .page-left {
-            left: 0;
             border-radius: 10px 0 0 10px;
             border-right: 2px solid #d3c5a3;
             background: linear-gradient(to right, #e8dcc4 0%, #f4ecd8 15%, #f4ecd8 95%, #e0d0b0 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            z-index: 1;
         }
 
         .page-right {
-            right: 0;
             border-radius: 0 10px 10px 0;
             background: linear-gradient(to left, #e8dcc4 0%, #f4ecd8 15%, #f4ecd8 95%, #e0d0b0 100%);
-            z-index: 1;
-        }
-
-        .page-turn {
-            width: 50%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            right: 0;
-            transform-origin: left center;
-            transform-style: preserve-3d;
-            animation: turnPage 1.8s ease-in-out forwards;
-            z-index: 10;
-        }
-
-        .page-turn-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            background: linear-gradient(to left, #e8dcc4 0%, #f4ecd8 15%, #f4ecd8 95%, #e0d0b0 100%);
-            border-radius: 0 10px 10px 0;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.1), -5px 0 15px rgba(0,0,0,0.2);
-            padding: 40px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .page-turn-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            background: linear-gradient(to right, #e8dcc4 0%, #f4ecd8 15%, #f4ecd8 95%, #e0d0b0 100%);
-            border-radius: 10px 0 0 10px;
-            transform: rotateY(180deg);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 5px 0 15px rgba(0,0,0,0.2);
-        }
-
-        @keyframes turnPage {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(-180deg); }
         }
 
         h1 {
@@ -117,11 +64,6 @@
             border-bottom: 2px solid #5c3a21;
             padding-bottom: 10px;
             font-style: italic;
-        }
-
-        p {
-            color: #4a3625;
-            line-height: 1.6;
         }
 
         form {
@@ -134,9 +76,9 @@
             text-align: left;
         }
 
-        input[type="text"], input[type="password"], input[type="email"] {
+        input[type="text"], input[type="password"], input[type="email"], select, input[type="file"] {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             margin-top: 5px;
             border: 1px solid #c2b28f;
             background: #fdfaf3;
@@ -150,7 +92,7 @@
             color: #5c3a21;
             font-weight: bold;
         }
-
+        
         .helptext, ul.errorlist {
             font-size: 12px;
             color: #8b5a33;
@@ -176,47 +118,38 @@
         button:hover {
             background-color: #3d2413;
         }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #8b5a33;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
         
-        .form-content {
-            opacity: 0;
-            animation: fadeIn 0.5s ease-in forwards 1.3s;
+        .back-link:hover {
+            text-decoration: underline;
         }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
     </style>
 </head>
 <body>
     <div class="book-container">
-        <!-- Left Page: Static behind the turn -->
         <div class="page page-left">
-            <h1>The Story Continues</h1>
-            <p>Welcome back.<br><br>Your adventure awaits within these pages.</p>
+            <h1>Xavfsizlik</h1>
+            <p style="color: #4a3625; line-height: 1.6;">O'z ma'lumotlaringizni va sirlaringizni ishonchli himoyada saqlang.</p>
         </div>
-
-        <!-- Right Page: Static behind the turn (contains the login form) -->
         <div class="page page-right">
-            <div class="form-content">
-                <h1>Log In</h1>
-                <form method="POST">
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <button type="submit">Log In</button>
-                </form>
+            <h1>Parolni O'zgartirish</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">O'zgartirish</button>
+            </form>
+            <div style="text-align: center;">
+                <a href="{% url 'accounts:profile' %}" class="back-link">Ortga Qaytish</a>
             </div>
-        </div>
-
-        <!-- The flipping page -->
-        <div class="page-turn">
-            <!-- Front of the flipping page (shows Registration Success info initially) -->
-            <div class="page-turn-front">
-                <h2>Turning Page...</h2>
-                <p>Welcome to the next chapter.</p>
-            </div>
-            <!-- Back of the flipping page (becomes the new left page) -->
-            <div class="page-turn-back"></div>
         </div>
     </div>
 </body>
