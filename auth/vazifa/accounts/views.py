@@ -26,7 +26,9 @@ class RegisterView(View):
     def post(self, request):
         form = RegisterForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
             return redirect('home')
         return render(request, 'auth/register.html', {"form" : form})
 
