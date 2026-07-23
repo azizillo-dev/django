@@ -32,3 +32,30 @@ class CreateClothes(View):
             return redirect('list')
         
         return render(request, 'clothes_create.html', {"form" : form})
+
+
+
+
+class ClothesUpdate(View):
+    def get(self, request, pk):
+        clothes = Clothes.objects.get(id=pk)
+        form = ClothesForm(instance=clothes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

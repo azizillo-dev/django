@@ -18,7 +18,7 @@ def create_car(request):
         mileage = request.POST.get("mileage")
         color = request.POST.get("color")
 
-        car = Car.objects.create(
+        Car.objects.create(
             brand = brand,
             model = model,
             price = price,

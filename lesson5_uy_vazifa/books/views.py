@@ -28,7 +28,17 @@ def create_book(request):
 
 
 
+def detail_book(request, id):
+    book = Book.objects.get(id=id)
+    context = {
+        "book" : book
+    }
+    return render(request, "detail.html", context)
 
+
+
+def index_(request):
+    return render(request, "index.html")
 
 
 

@@ -1,3 +1,20 @@
 from django.shortcuts import render
+from .models import Movie, Category, Producer
 
-# Create your views here.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,7 +6,6 @@ def home(request):
     return render(request, 'home.html')
 
 
-
 def list_(request):
     mebels = Mebel.objects.all()
     context = {
@@ -29,8 +28,6 @@ def delete(request, pk):
         mebel.delete()
         return redirect('list')
     return render(request, "delete.html", {"mebel":mebel})
-
-
 
 
 def create(request):

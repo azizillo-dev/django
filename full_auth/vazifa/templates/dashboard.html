@@ -1,180 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Book Shop</title>
-    <style>
-        body {
-            background-color: #f4ecd8;
-            background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            font-family: 'Georgia', serif;
-            margin: 0;
-            padding: 0;
-            color: #3d2413;
-        }
+{% extends 'base.html' %}
 
-        .overlay {
-            background-color: rgba(44, 30, 22, 0.85);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
-        }
+{% block title %}Dashboard - Book Shop{% endblock %}
 
-        .header {
-            text-align: center;
-            color: #f4ecd8;
-            margin-bottom: 50px;
-            animation: fadeInDown 1s ease-out;
-        }
+{% block body_class %}dashboard-body{% endblock %}
 
-        .header h1 {
-            font-size: 48px;
-            font-style: italic;
-            border-bottom: 2px solid #d3c5a3;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
+{% block extra_css %}
+    .overlay {
+        background-color: rgba(44, 30, 22, 0.85);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px 20px;
+    }
 
-        .header p {
-            font-size: 18px;
-            color: #d3c5a3;
-        }
+    .header {
+        text-align: center;
+        color: #f4ecd8;
+        margin-bottom: 50px;
+        animation: fadeInDown 1s ease-out;
+    }
 
-        .dashboard-container {
-            display: flex;
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
+    .header h1 {
+        font-size: 48px;
+        font-style: italic;
+        border-bottom: 2px solid #d3c5a3;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
 
-        .card {
-            background: linear-gradient(to bottom, #fdfaf3, #f4ecd8);
-            border-radius: 8px 12px 12px 8px;
-            width: 300px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
+    .header p {
+        font-size: 18px;
+        color: #d3c5a3;
+    }
 
-        /* Spine of the book */
-        .card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 25px;
-            background: #8b5a33;
-            border-right: 2px solid #5c3a21;
-            box-shadow: inset -2px 0 5px rgba(0,0,0,0.3);
-            z-index: 2;
-        }
+    .dashboard-container {
+        display: flex;
+        gap: 40px;
+        max-width: 1200px;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: fadeInUp 1s ease-out 0.5s both;
+    }
 
-        /* Paper pages effect on the right side */
-        .card::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 5px;
-            bottom: 5px;
-            width: 8px;
-            background: repeating-linear-gradient(
-                to bottom,
-                #fdfaf3,
-                #fdfaf3 2px,
-                #e8dcc4 2px,
-                #e8dcc4 4px
-            );
-            border-radius: 0 4px 4px 0;
-            z-index: 1;
-        }
+    .card {
+        background: linear-gradient(to bottom, #fdfaf3, #f4ecd8);
+        border-radius: 8px 12px 12px 8px;
+        width: 300px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+    }
 
-        .card:hover {
-            transform: translateY(-10px) rotateY(-5deg);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-        }
+    /* Spine of the book */
+    .card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 25px;
+        background: #8b5a33;
+        border-right: 2px solid #5c3a21;
+        box-shadow: inset -2px 0 5px rgba(0,0,0,0.3);
+        z-index: 2;
+    }
 
-        .card-content {
-            padding: 30px 30px 30px 45px;
-            position: relative;
-            z-index: 3;
-        }
+    /* Paper pages effect on the right side */
+    .card::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 5px;
+        bottom: 5px;
+        width: 8px;
+        background: repeating-linear-gradient(
+            to bottom,
+            #fdfaf3,
+            #fdfaf3 2px,
+            #e8dcc4 2px,
+            #e8dcc4 4px
+        );
+        border-radius: 0 4px 4px 0;
+        z-index: 1;
+    }
 
-        .card h2 {
-            font-size: 24px;
-            color: #5c3a21;
-            margin-top: 0;
-            border-bottom: 1px dashed #c2b28f;
-            padding-bottom: 10px;
-        }
+    .card:hover {
+        transform: translateY(-10px) rotateY(-5deg);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    }
 
-        .card p {
-            color: #4a3625;
-            line-height: 1.5;
-        }
+    .card-content {
+        padding: 30px 30px 30px 45px;
+        position: relative;
+        z-index: 3;
+    }
 
-        .btn {
-            display: inline-block;
-            background-color: #5c3a21;
-            color: #f4ecd8;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-top: 15px;
-            transition: background 0.3s;
-            font-style: italic;
-        }
+    .card h2 {
+        font-size: 24px;
+        color: #5c3a21;
+        margin-top: 0;
+        border-bottom: 1px dashed #c2b28f;
+        padding-bottom: 10px;
+    }
 
-        .btn:hover {
-            background-color: #3d2413;
-        }
+    .card p {
+        color: #4a3625;
+        line-height: 1.5;
+    }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        .logout-container {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            display: flex;
-            gap: 15px;
-            z-index: 10;
-        }
+    .logout-container {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        display: flex;
+        gap: 15px;
+        z-index: 10;
+    }
 
-        .nav-btn {
-            color: #f4ecd8;
-            text-decoration: none;
-            border: 1px solid #f4ecd8;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: all 0.3s;
-            font-style: italic;
-        }
+    .nav-btn {
+        color: #f4ecd8;
+        text-decoration: none;
+        border: 1px solid #f4ecd8;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: all 0.3s;
+        font-style: italic;
+    }
 
-        .nav-btn:hover {
-            background-color: #f4ecd8;
-            color: #2c1e16;
-        }
-    </style>
-</head>
-<body>
+    .nav-btn:hover {
+        background-color: #f4ecd8;
+        color: #2c1e16;
+    }
+{% endblock %}
+
+{% block content %}
     <div class="overlay">
         <div class="logout-container">
             <a href="{% url 'accounts:profile' %}" class="nav-btn">Profil</a>
@@ -215,5 +187,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

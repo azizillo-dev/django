@@ -19,7 +19,7 @@ class Category(BaseModel):
 class Clothes(BaseModel):
     brand = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
-    descrition = models.TextField()
+    description = models.TextField()
     color = models.CharField(max_length=45)
     size = models.CharField(max_length=5)
     is_available = models.BooleanField(default=True)
@@ -29,7 +29,6 @@ class Clothes(BaseModel):
         upload_to='clothes/', 
         null=True,
         blank=True,
-        default='💖',
         validators=[
             FileExtensionValidator(allowed_extensions=[
                 'jpg', 'png', 'webp', 'jpeg'

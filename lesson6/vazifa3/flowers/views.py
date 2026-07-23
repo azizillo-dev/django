@@ -43,7 +43,6 @@ def delete(request, id):
     context = {
         "flower": flower
     }
-
     return render(request, "delete.html", context)
 
 

@@ -19,7 +19,7 @@ class RegisterForm(ModelForm):
         data = super().clean()
         password = data.get('password')
         confirm_password = data.get('confirm_password')
-
+  
         if password and confirm_password and password != confirm_password:
             raise ValidationError("Parollar mos kelmadi !")
 
