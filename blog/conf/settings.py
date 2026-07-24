@@ -119,5 +119,5 @@ STATIC_URL = 'static/'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
-LOGIN_URL = 'account:login'
+LOGIN_URL = 'accounts:login'
 

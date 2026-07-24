@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=20, unique=True,null=True, blank=True)
     address = models.TextField(blank=True)
-    email = models.EmailField(unique=True, blank=True, null=True)
+    email = models.EmailField(unique=True)
 
 
     def __str__(self):
@@ -14,6 +14,9 @@ class CustomUser(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
         db_table = 'users'
+
+
+
 
 
 
