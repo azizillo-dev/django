@@ -89,12 +89,11 @@ class ProfileUpdateView(LoginRequiredMixin, View):
     
     def post(self, request):
         user = request.user
-        form = ProfileUpdateForm(data=request.POST)
+        form = ProfileUpdateForm(data=request.POST, instance=user)
         if form.is_valid():
-            user.save()
-        return render(request, 'auth/profile_update.html', {"form" : form})
-
-
+            form.save()
+            return redirect('accounts:profile')
+        return render(request, 'auth/profile_update.html', {"form": form})
 
 
 

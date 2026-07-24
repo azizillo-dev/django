@@ -41,18 +41,17 @@ class LoginForm(forms.Form):
         
 
 
-class ProfileUpdateForm(forms.Form):
+class ProfileUpdateForm(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['fisrt_name', 'last_name', 'email', 'username', 'phone', 'address']
+        fields = ['first_name', 'last_name', 'email', 'username', 'phone', 'address']
 
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        user = CustomUser.objects.exclude(pk=self.instanse.pk).filter(
-            username=username
-        ).exists()
-
+        user = CustomUser.objects.exclude(
+            pk=self.instance.pk
+            ).filter(username=username).exists() 
         if user:
             raise ValidationError("Bu username band")
         return username

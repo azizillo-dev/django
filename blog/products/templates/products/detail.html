@@ -1,30 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ product.name }}</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #f9f9f9; }
-        .card { background: white; padding: 20px; border-radius: 5px; border: 1px solid #ddd; max-width: 600px; }
-        a { text-decoration: none; color: #007bff; margin-right: 10px; }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
     <div class="card">
         <h1>{{ product.name }}</h1>
         {% if product.image %}
-            <img src="{{ product.image.url }}" alt="Image" style="max-width: 100%; height: auto; border-radius: 4px;">
+            <img src="{{ product.image.url }}" alt="Image" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;">
         {% endif %}
         <p><strong>Price:</strong> ${{ product.price }}</p>
         <p><strong>Description:</strong> {{ product.description }}</p>
         <p><strong>Owner:</strong> {{ product.owner.username }}</p>
         
         <div style="margin-top: 20px;">
-            <a href="{% url 'products:list' %}">Back to List</a>
+            <a href="{% url 'products:list' %}" class="btn" style="background: #6c757d;">Back to List</a>
             {% if request.user == product.owner %}
-                <a href="{% url 'products:update' product.pk %}">Edit</a>
-                <a href="{% url 'products:delete' product.pk %}" style="color: red;">Delete</a>
+                <a href="{% url 'products:update' product.pk %}" class="btn" style="background: #ffc107; color: black;">Edit</a>
+                <a href="{% url 'products:delete' product.pk %}" class="btn" style="background: #dc3545;">Delete</a>
             {% endif %}
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

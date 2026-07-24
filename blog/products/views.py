@@ -25,7 +25,7 @@ class ProductCreateView(LoginRequiredMixin, View):
         return render(request, "products/create.html", {"form" : form})
     
     def post(self, request):
-        form = ProductForm(data=request.POST)
+        form = ProductForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             product = form.save(commit=False)
             product.owner = request.user
@@ -45,7 +45,7 @@ class ProductUpdateView(LoginRequiredMixin, View):
     
     def post(self, request, pk):
         product = get_object_or_404(Product, pk=pk, owner=request.user)
-        form = ProductForm(data=request.POST, instance=product)
+        form = ProductForm(data=request.POST, instance=product,  files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('products:detail', pk=product.pk)
