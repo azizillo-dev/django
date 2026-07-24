@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
-from .forms import RegisterForm,LoginForm
+from .forms import RegisterForm,LoginForm, ProfileUpdateForm
 from django.views import View
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -73,7 +73,26 @@ class LogoutView(LoginRequiredMixin, View):
         return redirect('accounts:login')
 
 
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        user = request.user
+        return render(request, 'auth/profile.html', {"user": user})
 
+
+
+
+class ProfileUpdateView(LoginRequiredMixin, View):
+    def get(self, request):
+        user = request.user
+        form = ProfileUpdateForm(instance=user)
+        return render(request, 'auth/profile_update.html', {"form" : form})
+    
+    def post(self, request):
+        user = request.user
+        form = ProfileUpdateForm(data=request.POST)
+        if form.is_valid():
+            user.save()
+        return render(request, 'auth/profile_update.html', {"form" : form})
 
 
 

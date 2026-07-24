@@ -6,8 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Asssalomu alekum shaxsiy blog saytimga hush kelibsiz</h2>
-    <a href="{% url 'products:list' %}">Mahsulotlarga</a>
-    <a href="{% url 'accounts:profile' %}">Profilim</a>
+    {{user.fisrt_name}}<br>
+    {{user.last_name}}<br>
+    {{user.email}}<br>
+    {{user.username}}<br>
+    <a href="{% url 'accounts:update' %}">Tahrirlash</a>
 </body>
 </html>

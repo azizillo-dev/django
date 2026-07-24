@@ -6,8 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Asssalomu alekum shaxsiy blog saytimga hush kelibsiz</h2>
-    <a href="{% url 'products:list' %}">Mahsulotlarga</a>
-    <a href="{% url 'accounts:profile' %}">Profilim</a>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Saqlash</button>
+        <a href="{% url 'account:dashboard' %}">Orqaga</a>
+    </form>
 </body>
 </html>

@@ -12,16 +12,14 @@ class ProductListView(View):
         return render(request, 'products/products_list.html', {"products" : products})
 
 
-
-
-class ProductDetailView(View):
+class ProductDetailView(LoginRequiredMixin, View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
         return render(request, 'products/detail.html', {"product" : product})
     
 
 
-class ProductCreateView(View):
+class ProductCreateView(LoginRequiredMixin, View):
     def get(self, request):
         form = ProductForm()
         return render(request, "products/create.html", {"form" : form})
@@ -54,7 +52,7 @@ class ProductUpdateView(LoginRequiredMixin, View):
         return render(request, 'products/update.html', {"form" : form})
     
 
-class ProductDeleteView(View):
+class ProductDeleteView(LoginRequiredMixin, View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk, owner=request.user)
         return render(request, 'products/product_confirm_delete.html', {'product': product})
